@@ -1,0 +1,35 @@
+R_DEF: Internal format may change without notice
+local
+color accent
+color accent_dim
+color background
+color status_green
+color status_orange
+color status_red
+color status_yellow
+color surface
+color surface_elevated
+color text_hint
+color text_primary
+color text_secondary
+drawable bg_input
+drawable dot_green
+drawable dot_orange
+drawable dot_red
+drawable dot_yellow
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable ic_notification
+id browserScreen
+id homeScreen
+id loadButton
+id statusChip
+id statusDot
+id statusText
+id urlInput
+id webViewContainer
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme.OpenCodePersistentBrowser

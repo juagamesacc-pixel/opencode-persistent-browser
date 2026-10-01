@@ -27,9 +27,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import okhttp3.Cache
 import okhttp3.Call
@@ -308,9 +308,9 @@ class SessionKeepaliveService : Service() {
      * SSE monitor loop. Connects, reads the stream, parses events, updates the
      * checkpoint, and reconnects with backoff on failure.
      */
-    private suspend fun runSseLoop(endpoint: String) {
+    private suspend fun CoroutineScope.runSseLoop(endpoint: String) {
         val parser = SseParser()
-        while (currentCoroutineContext().isActive) {
+        while (isActive) {
             if (!isNetworkAvailable()) {
                 delay(backoff.nextDelayMs())
                 continue
@@ -340,7 +340,7 @@ class SessionKeepaliveService : Service() {
                     val body = response.body ?: return@use
                     val source = body.source()
                     val buf = ByteArray(8192)
-                    while (currentCoroutineContext().isActive) {
+                    while (isActive) {
                         val read = source.read(buf)
                         if (read == -1) break
                         val events = parser.feed(String(buf, 0, read, Charsets.UTF_8))
@@ -358,7 +358,7 @@ class SessionKeepaliveService : Service() {
                     }
                 }
             } catch (e: Exception) {
-                if (currentCoroutineContext().isActive) {
+                if (isActive) {
                     Log.w(TAG, "SSE error: ${e.javaClass.simpleName}")
                     monitorConnected = false
                     disconnectedWhileAway = true
@@ -367,7 +367,7 @@ class SessionKeepaliveService : Service() {
             } finally {
                 currentCall = null
             }
-            if (currentCoroutineContext().isActive) {
+            if (isActive) {
                 delay(backoff.nextDelayMs())
             }
         }
@@ -378,11 +378,11 @@ class SessionKeepaliveService : Service() {
      * conditional GET (If-None-Match / If-Modified-Since) so a 304 costs almost
      * nothing. Runs only while disconnected, with adaptive backoff.
      */
-    private suspend fun runProbeLoop(url: String) {
+    private suspend fun CoroutineScope.runProbeLoop(url: String) {
         var etag: String? = null
         var lastModified: String? = null
         var delayMs = 30_000L
-        while (currentCoroutineContext().isActive) {
+        while (isActive) {
             if (!isNetworkAvailable()) {
                 delay(delayMs)
                 continue

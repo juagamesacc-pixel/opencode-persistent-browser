@@ -207,7 +207,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Inject the EventSource observer at document start.
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_JAVASCRIPT)) {
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
             WebViewCompat.addDocumentStartJavaScript(wv, EventSourceObserver.SCRIPT, setOf("*"))
         }
 
@@ -216,7 +216,7 @@ class MainActivity : AppCompatActivity() {
                 super.onPageStarted(view, url, favicon)
                 controller.onPageStarted()
                 // Fallback observer injection if document-start JS was unavailable.
-                if (!WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_JAVASCRIPT)) {
+                if (!WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
                     view?.evaluateJavascript(EventSourceObserver.SCRIPT, null)
                 }
             }
@@ -273,7 +273,7 @@ class MainActivity : AppCompatActivity() {
             // If the page's live channel is open, we can show Connected.
             if (page != null && page.eventSourceUsed && page.anyOpen) {
                 controller.onMonitorState(
-                    monitorConnected = true,
+                    connected = true,
                     lastEventTime = System.currentTimeMillis(),
                     eventsWhileAway = 0,
                     disconnectedWhileAway = false

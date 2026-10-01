@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/drawable_bg_input.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/drawable/bg_input.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/drawable_dot_orange.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/drawable/dot_orange.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/drawable_dot_green.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/drawable/dot_green.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/drawable_dot_red.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/drawable/dot_red.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/drawable_ic_notification.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/drawable/ic_notification.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/drawable_dot_yellow.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/drawable/dot_yellow.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/layout_activity_main.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.opencode.persistentbrowser.app-debug-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.opencode.persistentbrowser.app-main-6:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    }
+]
