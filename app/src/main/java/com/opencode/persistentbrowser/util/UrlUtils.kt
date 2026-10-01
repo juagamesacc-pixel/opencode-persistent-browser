@@ -83,9 +83,9 @@ object UrlUtils {
             t = t.substring(0, pathIdx)
         }
 
-        // Split host:port.
+        // Split host:port. port = -1 means "not specified".
         var host = t
-        var port = 0
+        var port = -1
         if (t.startsWith("[")) {
             // IPv6 literal
             val end = t.indexOf(']')
@@ -106,7 +106,7 @@ object UrlUtils {
         }
 
         if (host.isEmpty()) return null
-        if (port !in 1..65535) return null
+        if (port != -1 && port !in 1..65535) return null
 
         if (scheme.isEmpty()) {
             // Scheme-less: only accept if it looks like a host (has a dot or is an IP).
