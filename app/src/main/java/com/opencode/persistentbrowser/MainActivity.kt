@@ -240,6 +240,26 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            override fun onReceivedSslError(
+                view: WebView?,
+                handler: android.webkit.SslErrorHandler?,
+                error: android.webkit.SslError?
+            ) {
+                // Do NOT auto-proceed — that would weaken TLS. Show a clear,
+                // actionable message and cancel (secure default).
+                val reason = when (error?.primaryError) {
+                    android.webkit.SslError.SSL_UNTRUSTED -> "Certificate not trusted (private/self-signed CA)"
+                    android.webkit.SslError.SSL_EXPIRED -> "Certificate expired"
+                    android.webkit.SslError.SSL_IDMISMATCH -> "Certificate hostname mismatch"
+                    android.webkit.SslError.SSL_NOTYETVALID -> "Certificate not yet valid"
+                    android.webkit.SslError.SSL_DATE_INVALID -> "Certificate date invalid"
+                    else -> "TLS handshake failed (protocol error)"
+                }
+                Log.e(TAG, "SSL error: ${error?.primaryError} url=${error?.url}")
+                controller.onPageError("SSL: $reason. If this is a private endpoint, install its CA in Settings > Security > Install certificates, then retry.")
+                handler?.cancel()
+            }
+
             override fun onRenderProcessGone(
                 view: WebView?,
                 detail: RenderProcessGoneDetail?

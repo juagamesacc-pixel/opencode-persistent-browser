@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Trust system CAs plus user-installed CAs.
+
+  User-CA trust is required for private endpoints (Tailscale Funnel with a
+  custom cert, corporate proxies, local dev servers). It does NOT disable
+  certificate validation — chains are still fully validated, and system CAs
+  remain trusted. Cleartext is permitted only because local OpenCode instances
+  are typically http:// on a LAN.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
